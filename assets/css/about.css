@@ -1,0 +1,105 @@
+.about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 100px 5%; /* Top padding to clear header */
+    width: 100%;
+}
+
+/* --- The Split Layout --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* --- Image Styling --- */
+.image-wrapper {
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+/* The "Offset" Border */
+.image-frame {
+    position: relative;
+    z-index: 1;
+}
+
+.image-frame::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--color-accent);
+    border-radius: 4px;
+    z-index: -1;
+    transition: transform 0.3s ease;
+}
+
+.image-wrapper:hover .image-frame::after {
+    transform: translate(5px, 5px);
+}
+
+.profile-img {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+}
+
+
+/* --- Text Styling --- */
+.about-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-text-main);
+    margin-bottom: 30px;
+}
+
+.bio-section {
+    margin-bottom: 25px;
+}
+
+.bio-section h3 {
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.bio-section p {
+    color: var(--color-text-dim);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.connect-btn-wrapper {
+    margin-top: 35px;
+}
+
+/* --- Responsive Layout (Mobile) --- */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .image-wrapper {
+        max-width: 280px;
+        margin-bottom: 20px;
+    }
+
+    .about-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .bio-section h3 {
+        text-align: left;
+    }
+}
