@@ -1,23 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 获取所有需要动画的元素
+
     const animatedElements = document.querySelectorAll('.fade-in-up');
 
-    // 简单的 IntersectionObserver (现代浏览器支持极好)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
-    }, {
-        threshold: 0.1 // 当元素出现10%时触发
-    });
+    }, { threshold: 0.1 });
 
     animatedElements.forEach(el => observer.observe(el));
 
-    // 延迟一点点让首屏文字更优雅地出现
     setTimeout(() => {
         const hero = document.querySelector('.hero');
         if(hero) hero.classList.add('visible');
     }, 100);
+
+
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-links li a").forEach(n => n.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+    }));
 });
