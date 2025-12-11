@@ -1,0 +1,129 @@
+/* assets/css/experience.css */
+
+.exp-container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 0 40px;
+}
+
+/* Page Header */
+.exp-page-header {
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-text-main);
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-dim);
+}
+
+/* Timeline / Card List */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 60px; /* 卡片之间的间距 */
+}
+
+/* Individual Experience Card */
+.exp-card {
+    position: relative;
+}
+
+/* Header: Role, Company, Date */
+.exp-header {
+    margin-bottom: 20px;
+    border-left: 2px solid var(--color-dim); /* 可选：给标题左侧加一条细线引导 */
+    padding-left: 0;
+}
+
+.role-info h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-text-main);
+    margin-bottom: 5px;
+}
+
+.company {
+    font-size: 1rem;
+    color: var(--color-text-dim);
+    font-weight: 500;
+}
+
+.date {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-accent); /* 使用强调色突出时间 */
+    font-weight: 600;
+}
+
+/* Reflection Box Styling */
+.reflection-box {
+    background-color: var(--color-secondary); /* 使用次级背景色 */
+    padding: 25px 30px;
+    border-radius: 0 8px 8px 0;
+    border-left: 4px solid var(--color-accent); /* 左侧强调边框 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.reflection-box:hover {
+    transform: translateX(5px); /* 悬停时微动，增加交互感 */
+}
+
+.reflection-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 可选：给 Reflection 标题加一个小图标 */
+.reflection-box h3::before {
+    content: "✦";
+    font-size: 1.2rem;
+}
+
+.reflection-box p {
+    color: var(--color-text-main);
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+.reflection-box strong {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .exp-container {
+        padding: 0 20px;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .role-info h2 {
+        font-size: 1.3rem;
+    }
+
+    .reflection-box {
+        padding: 20px;
+    }
+}
