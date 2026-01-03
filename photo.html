@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography | Michael Zhang</title>
+
+    <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+    <link rel="manifest" href="/assets/images/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+
+    <style>
+
+        :root {
+            --bg-color: #0a192f;        
+            --text-color: #f5f5f0;     
+            --accent-color: #64ffda;   
+            --card-bg: #112240;        
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: 80px; /* 防止内容被固定的 Header 遮挡 */
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            padding: 6rem 2rem 4rem; /* 调整了 padding 以适应新的 header */
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            color: var(--text-color);
+        }
+
+        /* --- 瀑布流布局样式 --- */
+        .photography-container {
+            max-width: 1200px;
+            margin: 0 auto 8rem;
+            padding: 0 2rem;
+        }
+
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+
+        .photo-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .photo-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .photo-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .photo-item:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .photo-overlay span {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .photo-overlay h3 {
+            font-size: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        /* --- Lightbox 样式 --- */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.98);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        @media (max-width: 992px) {
+            .masonry-grid { column-count: 2; }
+            .hero-section h1 { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .masonry-grid { column-count: 1; }
+            .hero-section { padding: 4rem 1rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html" class="logo">MichaelZ.</a>
+
+    <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <section class="hero-section">
+        <h1>Photography</h1>
+    </section>
+
+    <main class="photography-container">
+        <div class="masonry-grid">
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_0020.JPG" alt="Photo 1" loading="lazy">
+                <div class="photo-overlay">
+                    <span>School</span>
+                    <h3>Afternoon</h3>
+                </div>
+            </div>
+
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_0800.JPG" alt="Photo 2" loading="lazy">
+                <div class="photo-overlay">
+                    <span>Travel</span>
+                    <h3>Fog</h3>
+                </div>
+            </div>
+
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_0801.JPG" alt="Photo 3" loading="lazy">
+                <div class="photo-overlay">
+                    <span>Atmosphere</span>
+                    <h3>Afternoon</h3>
+                </div>
+            </div>
+
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_0806.JPG" alt="Photo 4" loading="lazy">
+                <div class="photo-overlay">
+                    <span>Travel</span>
+                    <h3>Window</h3>
+                </div>
+            </div>
+
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_0829.JPG" alt="Photo 5" loading="lazy">
+                <div class="photo-overlay">
+                    <span>Animal</span>
+                    <h3>Cat</h3>
+                </div>
+            </div>
+
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_0889.JPG" alt="Photo 6" loading="lazy">
+                <div class="photo-overlay">
+                    <span>Animal</span>
+                    <h3>Bird</h3>
+                </div>
+            </div>
+
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_0907.JPG" alt="Photo 7" loading="lazy">
+                <div class="photo-overlay">
+                    <span>Animal</span>
+                    <h3>Birds</h3>
+                </div>
+            </div>
+
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_4557.JPG" alt="Photo 8" loading="lazy">
+                <div class="photo-overlay">
+                    <span>Travel</span>
+                    <h3>Lake</h3>
+                </div>
+            </div>
+
+            <div class="photo-item" onclick="openLightbox(this)">
+                <img src="assets/images/photos/IMG_5020.JPG" alt="Photo 9" loading="lazy">
+                <div class="photo-overlay">
+                    <span>Travel</span>
+                    <h3>Hogwarts</h3>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">&times;</button>
+        <img id="lightbox-img" src="" alt="Fullscreen view">
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/petryiy" target="_blank" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+    
+                <a href="https://www.linkedin.com/in/ruiqi-zhang-michael/" target="_blank" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+    
+                <a href="mailto:contact@michaelzhang.dev" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+            </div>
+    
+            <p class="copyright">&copy; 2025 Michael Zhang. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        // --- 滚动淡入效果 ---
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.photo-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // --- Lightbox 功能 ---
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
