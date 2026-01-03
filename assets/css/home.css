@@ -12,8 +12,8 @@
 .hero-greeting {
     color: var(--color-accent);
     font-family: var(--font-body);
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: 20px;
+    /* margin-bottom: 1px; */
     letter-spacing: 1px;
 }
 
